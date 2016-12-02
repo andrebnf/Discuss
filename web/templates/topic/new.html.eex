@@ -3,5 +3,5 @@
     <%= text_input f, :title, placeholder: "Title", class: "form-control"%>
   </div>
 
-  <%= submit "Save Tipoc", class: "btn btn-primary"%>
+  <%= submit "Save Topic", class: "btn btn-primary"%>
 <% end %>
