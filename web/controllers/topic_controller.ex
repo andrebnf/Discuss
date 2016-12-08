@@ -26,7 +26,7 @@ defmodule Discuss.TopicController do
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Our dwarves are saying something went terribly wrong")
-        |> render "new.html", changeset: changeset
+        |> render("new.html", changeset: changeset)
     end
   end
 
@@ -49,7 +49,16 @@ defmodule Discuss.TopicController do
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Our dwarves are saying something went terribly wrong")
-        |> render "edit.html", changeset: changeset, topic: old_topic
+        |> render("edit.html", changeset: changeset, topic: old_topic)
     end
+  end
+
+  def delete(conn, %{"id" => topic_id}) do
+    Repo.get!(Topic, topic_id)
+    |> Repo.delete!
+
+    conn
+    |> put_flash(:info, "Topic deleted")
+    |> redirect(to: topic_path(conn, :index))
   end
 end
