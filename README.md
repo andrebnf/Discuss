@@ -1,5 +1,7 @@
 # Discuss
 
+This is a study application created by following the tutorial on Udemy course **The Complete Elixir and Phoenix Bootcamp**, instructed by [`Stephen Grider`](https://github.com/StephenGrider).
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
