@@ -20,4 +20,12 @@ defmodule Discuss.Router do
 
   end
 
+  scope "/auth", Discuss do
+    pipe_through :browser
+
+    # request function is already defined by ueberauth
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
 end
