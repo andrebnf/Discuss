@@ -24,6 +24,7 @@ defmodule Discuss.Router do
   scope "/auth", Discuss do
     pipe_through :browser
 
+    delete "/signout", AuthController, :signout
     # request function is already defined by ueberauth
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback

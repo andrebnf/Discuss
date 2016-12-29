@@ -17,6 +17,18 @@ defmodule Discuss.AuthController do
     signin(conn, changeset)
   end
 
+  def signout(conn, _params) do
+    conn
+    # configure_session with `drop: true` removes any cookie reference
+    # on the response, thus removing the flash messages as well. In this
+    # case, we only remove the user_id on the session
+    # |> configure_session(drop: true)
+    |> put_session(:user_id, nil)
+    |> put_flash(:info, "Signed out successfully")
+    |> redirect(to: topic_path(conn, :index))
+
+  end
+
   defp signin(conn, changeset) do
     case insert_or_update_user(changeset) do
       {:ok, user} ->
