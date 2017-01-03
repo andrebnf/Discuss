@@ -30,6 +30,10 @@ exports.config = {
     }
   },
 
+  autoRequire: {
+    "js\\app.js": ["web/static/js/app"]
+  },
+
   conventions: {
     // This option sets where we should place non-css and non-js assets in.
     // By default, we set this to "/web/static/assets". Files in this directory

@@ -4,7 +4,7 @@ defmodule Discuss.AuthController do
 
   alias Discuss.User
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     user_params = %{
       token: auth.credentials.token,
       email: auth.info.email,
@@ -15,6 +15,18 @@ defmodule Discuss.AuthController do
     changeset = User.changeset(%User{}, user_params)
 
     signin(conn, changeset)
+  end
+
+  def signout(conn, _params) do
+    conn
+    # configure_session with `drop: true` removes any cookie reference
+    # on the response, thus removing the flash messages as well. In this
+    # case, we only remove the user_id on the session
+    # |> configure_session(drop: true)
+    |> put_session(:user_id, nil)
+    |> put_flash(:info, "Signed out successfully")
+    |> redirect(to: topic_path(conn, :index))
+
   end
 
   defp signin(conn, changeset) do
