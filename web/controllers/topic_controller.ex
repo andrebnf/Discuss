@@ -15,7 +15,8 @@ defmodule Discuss.TopicController do
 
   def show(conn, %{"id" => topic_id}) do
     topic = Repo.get!(Topic, topic_id)
-    render conn, "show.html", topic: topic
+    comments = (from c in Discuss.Comment, where: c.topic_id == 3) |> Repo.all
+    render conn, "show.html", topic: topic, comments: comments
   end
 
   def new(conn, _params) do
